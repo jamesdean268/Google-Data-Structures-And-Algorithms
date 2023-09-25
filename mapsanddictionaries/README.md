@@ -10,3 +10,8 @@ It is easy to use a hash table with the help of standard template libraries. Mos
 
 By choosing a proper hash function, the hash table can achieve wonderful performance in both insertion and search.
 
+## Hash Set
+The hash set is one of the implementations of a set which is a data structure to store no repeated values. 
+
+
+

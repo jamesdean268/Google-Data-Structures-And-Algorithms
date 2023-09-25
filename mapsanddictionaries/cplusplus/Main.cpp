@@ -2,7 +2,25 @@
 #include <unordered_set>                // 0. include the library
 using namespace std;
 
+// ------------------------------------------------------------------------------------
+// Example function to find duplicates using HashSet
+// ------------------------------------------------------------------------------------
+bool findDuplicates(vector<int>& keys) {
+    unordered_set<int> hashset;
+    for (int key : keys) {
+        if (hashset.count(key) > 0) {
+            return true;
+        }
+        hashset.insert(key);
+    }
+    return false;
+}
+
 int main() {
+    // ------------------------------------------------------------------------------------
+    // HashSet Usage on LeetCode
+    // https://leetcode.com/explore/learn/card/hash-table/183/combination-with-other-algorithms/1130/
+    // ------------------------------------------------------------------------------------
     // 1. initialize a hash set
     unordered_set<int> hashset;   
     // 2. insert a new key
@@ -28,4 +46,15 @@ int main() {
     if (hashset.empty()) {
         cout << "hash set is empty now!" << endl;
     }
+
+    {
+        // ------------------------------------ Duplicate Function Test ---------------------------
+        vector<int> keysWithDuplicates = {1, 2, 3, 3, 4};
+        vector<int> keysWithoutDuplicates = {1, 2, 3, 4};
+        cout << "Should return true to identify a duplicate: " << findDuplicates(keysWithDuplicates) << endl;
+        cout << "Should return false to identify no duplicates: " << findDuplicates(keysWithoutDuplicates) << endl;
+        // ----------------------------------------------------------------------------------------
+    }
+
 }
+

@@ -1,6 +1,17 @@
 
 class Main:
-    def Main():
+    # ------------------------------------------------------------------------------------
+    # Example function to find duplicates using HashSet
+    # ------------------------------------------------------------------------------------
+    def findDuplicates(keys) -> bool:
+        hashset = set() 
+        for key in keys:
+            if (key in hashset):
+                return True
+            hashset.add(key)
+        return False
+
+    def Main(self):
         # ------------------------------------------------------------------------------------
         # HashSet Usage on LeetCode
         # https://leetcode.com/explore/learn/card/hash-table/183/combination-with-other-algorithms/1130/
@@ -27,5 +38,13 @@ class Main:
         print("Size of hashset:", len(hashset))
         # ------------------------------------------------------------------------------------
 
+        # ------------------------------------ Duplicate Function Test ---------------------------
+        keysWithDuplicates = [1, 2, 3, 3, 4]
+        keysWithoutDuplicates = [1, 2, 3, 4]
+        print("Should return true to identify a duplicate: " + str(self.findDuplicates(keysWithDuplicates)))
+        print("Should return false to identify no duplicates: " + str(self.findDuplicates(keysWithoutDuplicates)))
+        # ----------------------------------------------------------------------------------------
+
+
 if __name__ == '__main__':
-    Main.Main()
+    Main.Main(Main)

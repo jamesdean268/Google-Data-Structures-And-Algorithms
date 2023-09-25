@@ -1,6 +1,9 @@
 package mapsanddictionaries.java;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Set;
 
 public class Main {
@@ -37,6 +40,17 @@ public class Main {
         }
         // ------------------------------------------------------------------------------------
 
+        {
+            // ------------------------------------ Duplicate Function Test ---------------------------
+            Integer[] arrayWithDuplicates = {1, 2, 3, 3, 4};
+            List<Integer> keysWithDuplicates = Arrays.asList(arrayWithDuplicates);
+            Integer[] arrayWithoutDuplicates = {1, 2, 3, 4};
+            List<Integer> keysWithoutDuplicates = Arrays.asList(arrayWithoutDuplicates);
+            System.out.println("Should return true to identify a duplicate: " + findDuplicates(keysWithDuplicates));
+            System.out.println("Should return false to identify no duplicates: " + findDuplicates(keysWithoutDuplicates));
+            // ----------------------------------------------------------------------------------------
+        }
+
         // ----- START: HashSet Design Interactive Activity on LeetCode -----
         {
             MyHashSet hashSetObj = new MyHashSet();
@@ -62,7 +76,25 @@ public class Main {
         // ----- END: HashSet Design Interactive Activity on LeetCode -----
 
     }
+
+    // ------------------------------------------------------------------------------------
+    // Example function to find duplicates using HashSet
+    // ------------------------------------------------------------------------------------
+    static boolean findDuplicates(List<Integer> keys) {
+        Set<Integer> hashset = new HashSet<>();
+        for (Integer key : keys) {
+            if (hashset.contains(key)) {
+                return true;
+            }
+            hashset.add(key);
+        }
+        return false;
+    }
+
 }
+
+
+
 
 
 // ------------------------------------------------------------------------------------

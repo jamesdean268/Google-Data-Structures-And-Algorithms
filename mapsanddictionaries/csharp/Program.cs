@@ -32,5 +32,30 @@ class ProgramhashMapObj
             Console.WriteLine("hash set is empty now!");
         }
         // ------------------------------------------------------------------------------------
+
+        {
+            // ------------------------------------ Duplicate Function Test ---------------------------
+            List<int> keysWithDuplicates = new List<int> {1, 2, 3, 3, 4};
+            List<int> keysWithoutDuplicates = new List<int> {1, 2, 3, 4};
+            Console.WriteLine("Should return true to identify a duplicate: " + FindDuplicates(keysWithDuplicates));
+            Console.WriteLine("Should return false to identify no duplicates: " + FindDuplicates(keysWithoutDuplicates));
+            // ----------------------------------------------------------------------------------------
+        }
+
     }
+
+    // ------------------------------------------------------------------------------------
+    // Example function to find duplicates using HashSet
+    // ------------------------------------------------------------------------------------
+    static bool FindDuplicates(List<int> keys) {
+        HashSet<int> hashset = new HashSet<int>();
+        foreach (int key in keys) {
+            if (hashset.Contains(key)) {
+                return true;
+            }
+            hashset.Add(key);
+        }
+        return false;
+    }
+
 }
