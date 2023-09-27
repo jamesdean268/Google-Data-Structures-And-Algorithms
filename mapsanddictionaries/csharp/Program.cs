@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Globalization;
 
 class ProgramhashMapObj
@@ -34,6 +35,40 @@ class ProgramhashMapObj
             Console.WriteLine("hash set is empty now!");
         }
         // ------------------------------------------------------------------------------------
+
+        // ------------------------------------------------------------------------------------
+        // HashMap Usage on LeetCode
+        // https://leetcode.com/explore/learn/card/hash-table/184/comparison-with-other-data-structures/1129/
+        // ------------------------------------------------------------------------------------
+        // 1. initialize a hash map (dictionary in C#)
+        Dictionary<int, int> hashmap = new Dictionary<int, int>();
+        // 2. insert a new (key, value) pair
+        hashmap.TryAdd(0, 0);
+        hashmap.TryAdd(2, 3);
+        // 3. insert a new (key, value) pair or update the value of existed key
+        hashmap.Add(1, 1);
+        hashmap[1] = 2;
+        // 4. get the value of specific key
+        Console.WriteLine("The value of key 1 is: " + hashmap[1]);
+        // 5. delete a key
+        hashmap.Remove(2);
+        // 6. check if a key is in the hash map
+        if (!hashmap.ContainsKey(2)) {
+            Console.WriteLine("Key 2 is not in the hash map.");
+        }
+        // 7. get the size of the hash map
+        Console.WriteLine("The size of hash map is: " + hashmap.Count);
+        // 8. iterate the hash map
+        foreach (KeyValuePair<int, int> entry in hashmap) {
+            Console.Write("(" + entry.Key + "," + entry.Value + ") ");
+        }
+        Console.WriteLine("are in the hash map.");
+        // 9. clear the hash map
+        hashmap.Clear();
+        // 10. check if the hash map is empty
+        if (!hashmap.Any()) {
+            Console.WriteLine("hash map is empty now!");
+        }
 
         {
             // ------------------------------------ Duplicate Function Test ---------------------------
