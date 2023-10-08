@@ -2,6 +2,7 @@
     "dotnet.defaultSolution": "Solution.sln",
     "files.associations": {
         "vector": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "list": "cpp"
     }
 }
