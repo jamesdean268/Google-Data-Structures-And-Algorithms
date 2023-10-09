@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 class Program
 {
     static void Main(string[] args)
@@ -76,6 +78,28 @@ class Program
         linkedListTheSecond.AddAtHead(4);
         linkedListTheSecond.AddAtIndex(5,0);
         linkedListTheSecond.AddAtHead(6);
+
+
+        {
+            // ------------------------------------ HasCycle Function Test -----------------------
+            ListNode head = new ListNode(3);
+            head.next = new ListNode(2);
+            head.next.next = new ListNode(0);
+            head.next.next.next = new ListNode(-4);
+            head.next.next.next.next = head.next;
+            Console.WriteLine(HasCycle(head));
+        }
+
+        {
+            // ------------------------------------ DetectCycle Function Test -----------------------
+            ListNode head = new ListNode(3);
+            head.next = new ListNode(2);
+            head.next.next = new ListNode(0);
+            head.next.next.next = new ListNode(-4);
+            head.next.next.next.next = head.next;
+            Console.WriteLine(DetectCycle(head).val);
+        }
+
 
     }
 
@@ -193,4 +217,146 @@ class Program
 
     }
 
+    // ------------------------------------------------------------------------------------
+    // Leetcode Question: Linked List Cycle. 
+    // 
+    // Given head, the head of a linked list, determine if the linked list has a cycle in it.
+    // There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. 
+    // Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+    // Return true if there is a cycle in the linked list. Otherwise, return false.
+    //
+    // Input: head = [3,2,0,-4], pos = 1
+    // Output: true
+    // Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+    //
+    /**
+    * Definition for singly-linked list.
+    * public class ListNode {
+    *     public int val;
+    *     public ListNode next;
+    *     public ListNode(int x) {
+    *         val = x;
+    *         next = null;
+    *     }
+    * }
+    */
+    //
+    // https://leetcode.com/explore/learn/card/linked-list/214/two-pointer-technique/1212/
+    // ------------------------------------------------------------------------------------
+
+    public class ListNode {
+        public int val;
+        public ListNode next;
+        public ListNode(int x) {
+            val = x;
+            next = null;
+        }
+    }
+
+    static bool HasCycle(ListNode head) {
+        // Return false if head is null
+        if (head == null) {
+            return false;
+        }
+        // Use a fast runner and a slow runner, and see if they end up with the same object at any point
+        ListNode fastRunner = head;
+        ListNode slowRunner = head;
+        while(true){
+            // If the fast runner reaches a null for the next object, then return false.
+            fastRunner = fastRunner.next;
+            if (fastRunner == null){
+                return false;
+            }
+            // Increment fastRunner again so that it keeps doing two jumps
+            fastRunner = fastRunner.next;
+            if (fastRunner == null){
+                return false;
+            }
+            // Increment the slow runner
+            slowRunner = slowRunner.next;
+
+            // If the slow runner equals the fast runner, we have a loop
+            if (fastRunner.Equals(slowRunner)){
+                return true;
+            }
+        }
+        
+    }
+
+    // ------------------------------------------------------------------------------------
+    // Leetcode Question: Linked List Cycle II. 
+    // 
+    // Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.
+    //
+    /**
+    * Definition for singly-linked list.
+    * public class ListNode {
+    *     public int val;
+    *     public ListNode next;
+    *     public ListNode(int x) {
+    *         val = x;
+    *         next = null;
+    *     }
+    * }
+    */
+    //
+    // https://leetcode.com/explore/learn/card/linked-list/214/two-pointer-technique/1214/
+    // ------------------------------------------------------------------------------------
+    static ListNode DetectCycle(ListNode head) {
+        HashSet<ListNode> cycleNodes = new HashSet<ListNode>();
+        // Return false if head is null
+        if (head == null) {
+            return null;
+        }
+        // Use a fast runner and a slow runner, and see if they end up with the same object at any point
+        ListNode fastRunner = head;
+        ListNode slowRunner = head;
+        cycleNodes.Add(slowRunner);
+        while(true){
+            // If the fast runner reaches a null for the next object, then return false.
+            fastRunner = fastRunner.next;
+            if (fastRunner == null){
+                return null;
+            }
+            // Increment fastRunner again so that it keeps doing two jumps
+            fastRunner = fastRunner.next;
+            if (fastRunner == null){
+                return null;
+            }
+            // Increment the slow runner
+            slowRunner = slowRunner.next;
+            if (cycleNodes.Contains(slowRunner)){
+                return slowRunner;
+            }
+            cycleNodes.Add(slowRunner);
+
+        }
+
+    }
+
+    // ------------------------------------------------------------------------------------
+    // Leetcode Question: Linked List Cycle II. 
+    // 
+    // Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. 
+    // If the two linked lists have no intersection at all, return null.
+    //
+    // https://leetcode.com/explore/learn/card/linked-list/214/two-pointer-technique/1215/
+    // ------------------------------------------------------------------------------------
+    static ListNode GetIntersectionNode(ListNode headA, ListNode headB) {
+        HashSet<ListNode> intersectionListA = new HashSet<ListNode>();
+        ListNode iteratorA = headA;
+        ListNode iteratorB = headB;
+        while (iteratorA != null) {
+            intersectionListA.Add(iteratorA);
+            iteratorA = iteratorA.next;
+        }
+        while (iteratorB != null) {
+            if (intersectionListA.Contains(iteratorB)){
+                return iteratorB;
+            }
+            iteratorB = iteratorB.next;
+        }
+        return null;
+
+    }
 }
