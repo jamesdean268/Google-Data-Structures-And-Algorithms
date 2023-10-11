@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Transactions;
 
 class Program
 {
@@ -98,6 +99,45 @@ class Program
             head.next.next.next = new ListNode(-4);
             head.next.next.next.next = head.next;
             Console.WriteLine(DetectCycle(head).val);
+        }
+
+        {
+            // ------------------------------------ DetectCycle Function Test -----------------------
+            ListNode head = new ListNode(1);
+            head.next = new ListNode(2);
+            head.next.next = new ListNode(3);
+            head.next.next.next = new ListNode(4);
+            head.next.next.next.next = new ListNode(5);
+            ListNode newListNode = RemoveNthFromEnd(head, 2);
+            for (int i = 0; i < 4; i++) {
+                Console.Write(newListNode.val + ", ");
+                newListNode = newListNode.next;
+            }
+            Console.WriteLine();
+
+            ListNode nextHead = new ListNode(1);
+            nextHead.next = new ListNode(2);
+            ListNode nextNewListNode = RemoveNthFromEnd(nextHead, 2);
+            for (int i = 0; i < 1; i++) {
+                Console.Write(nextNewListNode.val + ", ");
+                nextNewListNode = nextNewListNode.next;
+            }
+            Console.WriteLine();
+        }
+
+        {
+            // ------------------------------------ ReverseList Function Test -----------------------
+            ListNode head = new ListNode(1);
+            head.next = new ListNode(2);
+            head.next.next = new ListNode(3);
+            head.next.next.next = new ListNode(4);
+            head.next.next.next.next = new ListNode(5);
+            ListNode newListNode = ReverseList(head);
+            for (int i = 0; i < 5; i++) {
+                Console.Write(newListNode.val + ", ");
+                newListNode = newListNode.next;
+            }
+            Console.WriteLine();
         }
 
 
@@ -359,4 +399,82 @@ class Program
         return null;
 
     }
+
+    // ------------------------------------------------------------------------------------
+    // Leetcode Question: Remove Nth Node From End of List. 
+    // 
+    // Given the head of a linked list, remove the nth node from the end of the list and return its head.
+    // Input: head = [1,2,3,4,5], n = 2
+    // Output: [1,2,3,5]
+    //
+    // https://leetcode.com/explore/learn/card/linked-list/214/two-pointer-technique/1296/
+    // ------------------------------------------------------------------------------------
+    static ListNode RemoveNthFromEnd(ListNode head, int n) {
+        // Exit early if empty or only has one element
+        if (head == null || head.next == null){
+            return null;
+        }
+        ListNode fastPointer = head;
+        int sizeCounter = 0;
+        // Find how big the linked list is using a fast pointer:
+        try {
+            while (true){
+                fastPointer = fastPointer.next.next;
+                if (fastPointer == null){
+                    sizeCounter = sizeCounter + 2;
+                    break;
+                }
+                sizeCounter = sizeCounter + 2;
+            }
+        } catch {
+            sizeCounter = sizeCounter + 1;
+        }
+
+        // Use the sizeCounter to determine how far from end
+        int nthElement = sizeCounter - n;
+
+        // Delete at head
+        if (nthElement == 0) {
+            head = head.next;
+            return head;
+        }
+
+        // Delete at the index
+        ListNode newHead = head;
+        for (int i = 0; i < nthElement - 1; i++) {
+            newHead = newHead.next;
+        }
+        newHead.next = newHead.next.next;
+        return head;
+    }
+
+
+    // ------------------------------------------------------------------------------------
+    // Leetcode Question: Reverse Linked List 
+    // 
+    // Given the head of a singly linked list, reverse the list, and return the reversed list.
+    // Input: head = [1,2,3,4,5]
+    // Output: [5,4,3,2,1]
+    //
+    // https://leetcode.com/explore/learn/card/linked-list/219/classic-problems/1205/
+    // ------------------------------------------------------------------------------------
+    static ListNode ReverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode blackNode = head;
+
+        while (blackNode != null) {
+            ListNode newHead = blackNode.next;
+            blackNode.next = prev;
+            prev = blackNode;
+            blackNode = newHead;
+        }
+
+        return prev;
+
+    }
+
+            // Node newNode = new Node(val);
+            // newNode.next = head;
+            // head = newNode;
+
 }
