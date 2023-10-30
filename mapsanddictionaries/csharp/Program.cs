@@ -263,7 +263,7 @@ class ProgramhashMapObj
     // Input: n = 19
     // Output: true
     //
-    // https://leetcode.com/explore/learn/card/hash-table/183/combination-with-other-algorithms/1105/
+    // https://leetcode.com/explore/learn/card/hash-table/183/combination-with-other-algorithms/1131/
     // ------------------------------------------------------------------------------------
     static bool IsHappy(int n) {
         // check if 1 already, if so, return true
