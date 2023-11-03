@@ -199,13 +199,51 @@ class Program
     // Output: true
     //
     // https://leetcode.com/explore/learn/card/data-structure-tree/17/solve-problems-recursively/536/
+
+    static private bool IsMirror(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        return left.val == right.val && IsMirror(left.left, right.right) && IsMirror(left.right, right.left);
+    }
+
+    static public bool IsSymmetric(TreeNode root) {
+        return IsMirror(root, root);
+    }
+
+    // static bool IsSymmetric(TreeNode root) {
+    //     // ----- Pseudo-code -----
+    //     // Iteratively traverse tree to build up a list of lists for each level
+    //     // For each list, check if the first value equals the last value, and iteratively step inwards
+    //     // Return false if there is a mis-match, if everything passes, return true at the end.
+    //     return false;
+    // }
+
     // ------------------------------------------------------------------------------------
-    static bool IsSymmetric(TreeNode root) {
-        // ----- Pseudo-code -----
-        // Iteratively traverse tree to build up a list of lists for each level
-        // For each list, check if the first value equals the last value, and iteratively step inwards
-        // Return false if there is a mis-match, if everything passes, return true at the end.
-        return false;
+    // Leetcode Question: Path Sum
+    // 
+    // Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
+    //
+    // Input: root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22
+    // Output: true
+    //
+    // https://leetcode.com/explore/learn/card/data-structure-tree/17/solve-problems-recursively/537/
+
+    public bool HasPathSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return false;
+        }
+
+        // If the current node is a leaf node and its value is equal to the target sum, then return true.
+        if (root.left == null && root.right == null && root.val == targetSum) {
+            return true;
+        }
+
+        // Otherwise, recursively check if there is a path sum from the left and right subtrees.
+        return HasPathSum(root.left, targetSum - root.val) || HasPathSum(root.right, targetSum - root.val);
     }
 
 }
