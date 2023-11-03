@@ -27,15 +27,16 @@ struct TreeNode {
 // that sums up to the given target sum
 bool hasPathSum(TreeNode* root, int targetSum) {
     // base case
-    if (root == nullptr)
+    if (root == nullptr) {
         return false;
+    }
 
     // if the current node is a leaf node and
     // its value is equal to the target sum
-    if (root->left == nullptr && root->right == nullptr &&
-        root->val == targetSum)
+    if (root->left == nullptr && root->right == nullptr && root->val == targetSum) {
         return true;
-
+    }
+    
     // recursively check the left and right subtrees
     return hasPathSum(root->left, targetSum - root->val) ||  hasPathSum(root->right, targetSum - root->val);
 }
