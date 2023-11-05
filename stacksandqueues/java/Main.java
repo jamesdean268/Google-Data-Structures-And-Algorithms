@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 class MyQueue {
     // store elements
@@ -72,6 +73,26 @@ public class Main {
         System.out.println("The first element is: " + stdQ.peek());
         // 7. Get the size of the queue.
         System.out.println("The size is: " + stdQ.size());
+
+        // ------------ In-Built Stack -------------
+        // 1. Initialize a stack.
+        Stack<Integer> s = new Stack<>();
+        // 2. Push new element.
+        s.push(5);
+        s.push(13);
+        s.push(8);
+        s.push(6);
+        // 3. Check if stack is empty.
+        if (s.empty() == true) {
+            System.out.println("Stack is empty!");
+            return;
+        }
+        // 4. Pop an element.
+        s.pop();
+        // 5. Get the top element.
+        System.out.println("The top element is: " + s.peek());
+        // 6. Get the size of the stack.
+        System.out.println("The size is: " + s.size());
     }
 
 }

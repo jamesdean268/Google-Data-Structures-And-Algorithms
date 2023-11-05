@@ -20,6 +20,19 @@ class Main:
         element = queue.get()
         print(element)
 
+        # --------------- In-built implementation -------------
+        stack = []
+
+        stack.append(1)
+        stack.append(2)
+        stack.append(3)
+
+        print(stack)  # Output: [3, 2, 1]
+
+        popped = stack.pop()
+        print(popped)  # Output: 3
+        print(stack)  # Output: [2, 1]
+
 # ---------------- Custom implementation ----------------
 class Queue:
     def __init__(self):
